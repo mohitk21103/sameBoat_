@@ -1,0 +1,121 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.log
+*.pot
+*.mo
+*.sqlite3
+db.sqlite3
+*.db
+*.env
+*.env.*
+.envrc
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.mypy_cache/
+.pytest_cache/
+.coverage
+.tox/
+.cache/
+.pyre/
+.pyright/
+*.cover
+*.DS_Store
+*.swp
+*.bak
+*.tmp
+*.orig
+*.old
+*.idea/
+*.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Django
+staticfiles/
+media/
+local_settings.py
+instance/
+.settings/
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Sphinx documentation
+docs/_build/
+
+# ---- Node/Frontend ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+dist/
+build/
+.cache/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# ---- HTML/CSS/JS/Frontend ----
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*.map
+
+# Tailwind
+.tailwind*
+*.css.map
+
+# ---- OS/Editor/Tooling ----
+.DS_Store
+Thumbs.db
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ---- Misc ----
+*.orig
+*.rej
+
+# ---- Environment/Secrets ----
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# ---- Render/Deployment ----
+render.yaml.local
+# End Generation Here
+
+*.md

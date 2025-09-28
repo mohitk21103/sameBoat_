@@ -1,0 +1,134 @@
+# Add directories or file patterns to ignore during indexing (e.g. foo/ or *.csv)
+.env*
+# Secret files and directories
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+.ssh/
+
+# Credentials/config containing tokens
+.npmrc
+.pypirc
+.git-credentials
+
+# Cloud provider credentials
+.aws/
+.gcp/
+.azure/
+
+# Terraform state and variables
+terraform.tfstate
+terraform.tfstate.*
+.terraform/
+*.tfvars
+*.tfvars.json
+
+# Generic secrets
+.secrets/
+.secret/
+secrets.*
+*.secret
+*.secrets
+*.keystore
+*.jks
+
+# Build artifacts, dependencies, and caches
+node_modules/
+dist/
+build/
+coverage/
+coverage-final.json
+*.lcov
+.nyc_output/
+
+# Frontend framework outputs
+.next/
+.nuxt/
+out/
+.svelte-kit/
+.angular/
+.parcel-cache/
+.vite/
+.vite-cache/
+.turbo/
+.cache/
+
+# Package manager caches
+.pnpm-store/
+.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.npm/
+
+# Python builds and caches
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+*.egg-info/
+pip-wheel-metadata/
+
+# Java/Gradle/Maven
+target/
+.gradle/
+.m2/
+*.class
+
+# Go
+bin/
+pkg/
+
+# Ruby
+vendor/bundle/
+.bundle/
+
+# Rust
+target/
+
+# Logs and OS junk
+*.log
+logs/
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Databases and local data
+*.sqlite3
+*.db
+*.sqlite
+
+# Virtual environments and local tooling
+.venv/
+venv/
+env/
+.conda/
+.direnv/
+.python-version
+
+# IDE/editor project files
+.vscode/
+.idea/
+.history/
+.fleet/
+.VSCodeCounter/
+
+# App-specific large/generated content (keep code index lean)
+backend/media/
+backend/staticfiles/
+staticfiles/
+static/
+public/.well-known/
+uploads/
+storage/
+**/screenshots/
+**/__snapshots__/
+
+# Git internals
+.git/

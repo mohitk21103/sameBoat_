@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="scroll-smooth antialiased selection:bg-yellow-500 selection:text-black"
+>
+  <head>
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sameBoat</title>
+    <script type="module" src="../src/components/navbar.js"></script>
+    <link rel="stylesheet" href="../dist/css/styles.css" />
+  </head>
+
+  <body
+    data-page="index"
+    class="bg-gray-100 dark:bg-black font-sans antialiased transition-colors duration-300"
+  >
+    <!-- Hero Section -->
+    <section class="pt-28 pb-20 px-6">
+      <div
+        class="grid grid-cols-1 md:grid-cols-12 gap-10 max-w-7xl mx-auto items-center"
+      >
+        <!-- Left -->
+        <div class="md:col-span-5 space-y-6 animate-fadeUp">
+          <h1
+            class="font-extrabold text-5xl md:text-6xl leading-tight text-black dark:text-white"
+          >
+            Manage your job hunt smarter,<br />
+            not harder.
+          </h1>
+          <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300">
+            Forget messy spreadsheets. With
+            <span class="text-yellow-600 dark:text-yellow-400 font-semibold"
+              >sameBoat</span
+            >, track and organize all your job applications in one place.
+          </p>
+          <div class="flex space-x-4">
+            <a
+              id="get-started"
+              href="./login.html"
+              class="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg shadow-lg hover:shadow-yellow-500/50 transform hover:scale-105 transition"
+              >Get Started</a
+            >
+
+            <button
+              class="px-6 py-3 border border-gray-500 hover:border-yellow-400 hover:text-yellow-400 text-black dark:text-white font-semibold rounded-lg transform hover:scale-105 transition"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="md:col-span-7 flex justify-center animate-float">
+          <div
+            class="bg-gray-200 dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden w-full max-w-xl transform hover:scale-105 transition duration-500"
+          >
+            <img
+              src="./brand.png"
+              alt="sameBoat Preview"
+              class="object-cover w-full h-72 md:h-96"
+            />
+            <div
+              class="p-4 bg-white/70 dark:bg-black/70 text-center transition-colors"
+            >
+              <h1
+                class="text-xl font-semibold text-yellow-600 dark:text-yellow-400"
+              >
+                Your Job Tracker, Simplified
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="dark:bg-black text-black dark:text-white py-20 px-6 transition-colors"
+    >
+      <div class="max-w-6xl mx-auto text-center space-y-10">
+        <!-- Heading -->
+        <h2
+          class="text-4xl md:text-5xl font-extrabold tracking-wide text-[#bf8b16] animate-fadeUp"
+        >
+          About sameBoat
+        </h2>
+        <p
+          class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto animate-fadeUp"
+        >
+          Finding your dream job is tough. Tracking your applications shouldn’t
+          be. That’s why we built
+          <span class="font-semibold text-[#bf8b16]">sameBoat</span> — your
+          career co-pilot.
+        </p>
+
+        <!-- Features -->
+        <div class="grid sm:grid-cols-3 gap-8">
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-yellow-500/20 transform hover:-translate-y-2 transition duration-500"
+          >
+            <span class="text-3xl">⚓</span>
+            <h3 class="mt-4 font-semibold text-xl">Stay Organized</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Save and organize job applications in one place.
+            </p>
+          </div>
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-yellow-500/20 transform hover:-translate-y-2 transition duration-500"
+          >
+            <span class="text-3xl">📝</span>
+            <h3 class="mt-4 font-semibold text-xl">Track Progress</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Manage resumes, cover letters, and interview notes with ease.
+            </p>
+          </div>
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-yellow-500/20 transform hover:-translate-y-2 transition duration-500"
+          >
+            <span class="text-3xl">🔍</span>
+            <h3 class="mt-4 font-semibold text-xl">Focus Smarter</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Stay on top of your progress without clutter.
+            </p>
+          </div>
+        </div>
+
+        <!-- Closing Line -->
+        <p
+          class="italic text-gray-600 dark:text-gray-400 max-w-2xl mx-auto animate-fadeUp"
+        >
+          Because in the job hunt, we’re all in the same boat.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section
+      id="services"
+      class="bg-gray-100 dark:bg-black text-black dark:text-white py-20 px-6 transition-colors"
+    >
+      <div class="max-w-6xl mx-auto text-center space-y-10">
+        <!-- Heading -->
+        <h2
+          class="text-4xl md:text-5xl font-extrabold tracking-wide text-[#bf8b16] animate-fadeUp"
+        >
+          Our Services
+        </h2>
+        <p
+          class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto animate-fadeUp"
+        >
+          sameBoat gives you the tools you need to take control of your job
+          search journey — simple, organized, and stress-free.
+        </p>
+
+        <!-- Services Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Service Card -->
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md transform hover:-translate-y-2 hover:scale-105 hover:shadow-yellow-500/30 transition duration-500"
+          >
+            <span class="text-3xl">📂</span>
+            <h3 class="mt-4 font-semibold text-xl">Application Tracking</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Track all your job applications, from applied to shortlisted or
+              rejected, in one dashboard.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md transform hover:-translate-y-2 hover:scale-105 hover:shadow-yellow-500/30 transition duration-500"
+          >
+            <span class="text-3xl">📄</span>
+            <h3 class="mt-4 font-semibold text-xl">Resume Management</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Upload and manage multiple resumes, choosing the right one for
+              each application.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md transform hover:-translate-y-2 hover:scale-105 hover:shadow-yellow-500/30 transition duration-500"
+          >
+            <span class="text-3xl">🔗</span>
+            <h3 class="mt-4 font-semibold text-xl">Job Links</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Save company job pages or dashboards for quick access anytime.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md transform hover:-translate-y-2 hover:scale-105 hover:shadow-yellow-500/30 transition duration-500"
+          >
+            <span class="text-3xl">🗒️</span>
+            <h3 class="mt-4 font-semibold text-xl">Interview Notes</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Keep detailed notes about interviews and feedback for better
+              preparation.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl shadow-md transform hover:-translate-y-2 hover:scale-105 hover:shadow-yellow-500/30 transition duration-500"
+          >
+            <span class="text-3xl">📊</span>
+            <h3 class="mt-4 font-semibold text-xl">Progress Insights</h3>
+            <p class="mt-2 text-gray-700 dark:text-gray-300">
+              Visualize your job hunt progress and stay motivated throughout the
+              process.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="../src/components/footer.js" type="module"></script>
+    <script src="../src/js/main.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "frontend for sameBoat webapp",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./src/css/tailwind.css -o ./dist/css/styles.css --watch",
+    "build": "tailwindcss -i ./src/css/tailwind.css -o ./dist/css/styles.css --minify"
+  },
+  "author": "Mohit Kanojiya",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "zxcvbn": "^4.4.2"
+  }
+}

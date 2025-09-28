@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="scroll-smooth antialiased selection:bg-yellow-500 selection:text-black"
+>
+  <head>
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Job | sameBoat</title>
+    <link rel="stylesheet" href="../dist/css/styles.css" />
+    <script type="module" src="../src/components/navbar.js"></script>
+  </head>
+  <body
+    data-page="update_job"
+    class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300"
+  >
+    <!-- Main Content -->
+    <main class="min-h-screen flex items-center justify-center px-4 pt-28">
+      <div
+        class="bg-white dark:bg-gray-900 backdrop-blur-lg shadow-2xl rounded-2xl p-8 w-full max-w-4xl"
+      >
+        <h1
+          class="text-3xl font-extrabold mb-6 text-center text-gray-900 dark:text-white"
+        >
+          Update Job
+        </h1>
+
+        <form
+          id="updateJob-form"
+          enctype="multipart/form-data"
+          class="grid md:grid-cols-2 gap-6"
+        >
+          <!-- Active Field -->
+          <div class="md:col-span-2">
+            <label
+              for="is_active"
+              class="block text-lg font-semibold text-yellow-600 dark:text-yellow-500 mb-2"
+            >
+              Is the Job Active?
+            </label>
+            <select
+              id="is_active"
+              name="is_active"
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 shadow-sm focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 bg-white dark:bg-gray-800 dark:text-white"
+            >
+              <option value="" disabled selected>-- Select Status --</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <!-- Job Title -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Job Title</label
+            >
+            <input
+              id="job_title"
+              type="text"
+              name="job_title"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+              required
+            />
+          </div>
+
+          <!-- Company Name -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Company Name</label
+            >
+            <input
+              id="company_name"
+              type="text"
+              name="company_name"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+              required
+            />
+          </div>
+
+          <!-- Location -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Location</label
+            >
+            <input
+              id="location"
+              type="text"
+              name="location"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            />
+          </div>
+
+          <!-- Employment Type -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Employment Type</label
+            >
+            <select
+              id="employment_type"
+              name="employment_type"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            >
+              <option value="FULLTIME">Full Time</option>
+              <option value="PARTTIME">Part Time</option>
+              <option value="INTERNSHIP">Internship</option>
+              <option value="CONTRACT">Contract</option>
+            </select>
+          </div>
+
+          <!-- Experience -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Experience Required</label
+            >
+            <input
+              id="experience_required"
+              type="text"
+              name="experience_required"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+              required
+            />
+          </div>
+
+          <!-- Skills -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Skills</label
+            >
+            <input
+              id="skills"
+              type="text"
+              name="skills"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            />
+          </div>
+
+          <!-- Current Status -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Current Status</label
+            >
+            <select
+              id="current_status"
+              name="current_status"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            >
+              <option value="SAVED">Saved</option>
+              <option value="APPLIED">Applied</option>
+              <option value="SHORTLISTED">Shortlisted</option>
+              <option value="INTERVIEW">Interview</option>
+              <option value="OFFER">Offer</option>
+              <option value="REJECTED">Rejected</option>
+            </select>
+          </div>
+
+          <!-- Applied Date -->
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Applied Date</label
+            >
+            <input
+              id="applied_date"
+              type="date"
+              name="applied_date"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            />
+          </div>
+
+          <!-- Job URL -->
+          <div class="md:col-span-2">
+            <label
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Job URL</label
+            >
+            <input
+              id="job_url"
+              type="url"
+              name="job_url"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            />
+          </div>
+
+          <!-- Resume Upload -->
+          <div class="space-y-2">
+            <label
+              for="resume"
+              class="block font-medium text-gray-800 dark:text-gray-300"
+            >
+              Upload Resume
+              <span
+                id="last-resume-link"
+                class="font-bold text-blue-500 ml-2"
+              ></span>
+            </label>
+            <input
+              id="resume"
+              type="file"
+              name="resume"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600"
+            />
+            <p
+              id="selected-file"
+              class="text-sm text-gray-500 dark:text-gray-400"
+            ></p>
+          </div>
+
+          <!-- Cover Letter Upload -->
+          <div>
+            <label
+              for="cover_letter"
+              class="block font-medium text-gray-800 dark:text-gray-300"
+            >
+              Upload Cover Letter
+              <span
+                id="last-cover_letter"
+                class="font-bold text-blue-500 ml-2"
+              ></span>
+            </label>
+            <input
+              id="cover_letter"
+              type="file"
+              name="cover_letter"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600"
+            />
+          </div>
+
+          <!-- Notes -->
+          <div class="md:col-span-2">
+            <label
+              for="notes"
+              class="block mb-2 font-medium text-gray-800 dark:text-gray-300"
+              >Additional Notes</label
+            >
+            <textarea
+              id="notes"
+              name="notes"
+              rows="3"
+              class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            ></textarea>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              Add any quick notes or remarks.
+            </p>
+          </div>
+
+          <!-- Submit -->
+          <div class="md:col-span-2 text-center mt-6">
+            <button
+              type="submit"
+              class="w-full bg-yellow-700 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+            >
+              Update Job
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-6 text-center text-xs text-gray-400">
+          © 2025 <span class="font-semibold text-gray-200">sameBoat</span>. All
+          rights reserved.
+        </p>
+      </div>
+    </main>
+
+    <script src="../src/js/main.js" type="module"></script>
+  </body>
+</html>

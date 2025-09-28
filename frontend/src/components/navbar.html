@@ -1,0 +1,228 @@
+<!-- Navbar Component -->
+<nav
+  class="bg-gradient-to-r from-yellow-600 via-yellow-900 to-black dark:from-black dark:via-yellow-800 dark:to-gray-900 shadow-lg fixed item-center w-full z-20 top-0 left-0 backdrop-blur-md bg-opacity-90 transition-colors duration-500 rounded-full"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <!-- Brand -->
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-10 h-10 bg-black dark:bg-white rounded-full flex items-center justify-center shadow-md"
+        >
+          <span class="text-white dark:text-black font-bold">S</span>
+        </div>
+        <a
+          id="brand_name"
+          class="font-extrabold text-2xl tracking-wide text-gray-900 dark:text-yellow-400"
+          href="./index.html"
+        >
+          sameBoat
+        </a>
+      </div>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a
+          href="./index.html"
+          data-page="home"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Home
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="about-link"
+          href="#about"
+          data-page="home"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          About
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="services-link"
+          href="#services"
+          data-page="home"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Services
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="add_job"
+          href="./add_job.html"
+          data-page="add_job"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Add Job
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="job_sheet"
+          href="./job_sheet.html"
+          data-page="job_sheet"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Job Sheet
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="contact"
+          href="./contact.html"
+          data-page="contact"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Contact
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <a
+          id="login"
+          href="./login.html"
+          data-page="login"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Login
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </a>
+
+        <button
+          id="logout-btn"
+          class="group relative text-white dark:text-gray-300 px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out hover:text-yellow-400"
+        >
+          Logout
+          <span
+            class="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-400 transition-all duration-300 ease-in-out group-hover:w-full"
+          ></span>
+        </button>
+
+        <!-- Theme toggle -->
+        <button class="theme-toggle p-2 rounded-lg text-xl">🌙</button>
+      </div>
+
+      <!-- Hamburger Button -->
+      <div class="flex md:hidden items-center">
+        <button
+          id="menu-toggle"
+          class="relative w-8 h-8 flex flex-col justify-between"
+        >
+          <span
+            class="block h-1 w-full bg-gray-700 dark:bg-gray-300 rounded transition-transform duration-300 ease-in-out origin-center"
+          ></span>
+          <span
+            class="block h-1 w-full bg-gray-700 dark:bg-gray-300 rounded transition-opacity duration-300 ease-in-out"
+          ></span>
+          <span
+            class="block h-1 w-full bg-gray-700 dark:bg-gray-300 rounded transition-transform duration-300 ease-in-out origin-center"
+          ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Backdrop Overlay -->
+<div
+  id="mobile-backdrop"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40"
+></div>
+
+<!-- Mobile Drawer -->
+<div
+  id="mobile-menu"
+  class="fixed top-0 right-0 h-full w-72 bg-gradient-to-b from-yellow-600 via-yellow-900 to-black dark:from-black dark:via-gray-900 dark:to-yellow-600 shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out z-50 flex flex-col p-8 space-y-6 rounded-l-2xl"
+>
+  <a
+    href="./index.html"
+    data-page="home"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Home</a
+  >
+
+  <a
+    id="about-link"
+    href="#about"
+    data-page="home"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >About</a
+  >
+
+  <a
+    id="services-link"
+    href="#services"
+    data-page="home"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Services</a
+  >
+
+  <a
+    id="add_job-mobile"
+    href="./add_job.html"
+    data-page="add_job"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Add Job</a
+  >
+
+  <a
+    id="job_sheet-mobile"
+    href="./job_sheet.html"
+    data-page="job_sheet"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Job Sheet</a
+  >
+
+  <a
+    id="contact-mobile"
+    href="./contact.html"
+    data-page="contact"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Contact</a
+  >
+
+  <a
+    id="login-mobile"
+    href="./login.html"
+    data-page="login"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+    >Login</a
+  >
+
+  <button
+    id="logout-btn-mobile"
+    class="mobile-link opacity-0 translate-x-6 dark:text-gray-300"
+  >
+    Logout
+  </button>
+
+  <!-- Theme toggle inside mobile -->
+  <button
+    class="theme-toggle p-3 rounded-xl text-2xl bg-white/10 dark:bg-black/20 hover:scale-110 transition-transform"
+  >
+    🌙
+  </button>
+</div>
+
+<!-- Overlay -->
+<div
+  id="overlay"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden transition-opacity duration-300 ease-in-out z-40"
+></div>

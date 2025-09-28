@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="scroll-smooth antialiased selection:bg-yellow-500 selection:text-black"
+>
+  <head>
+    <script>
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Sheet | sameBoat</title>
+    <link rel="stylesheet" href="../dist/css/styles.css" />
+    <style>
+      @keyframes slideDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      .animate-slideDown {
+        animation: slideDown 220ms ease-out;
+      }
+      .animate-fadeIn {
+        animation: fadeIn 180ms ease-out;
+      }
+
+      .glass-border {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(0, 0, 0, 0.08)
+        );
+        backdrop-filter: blur(6px);
+      }
+    </style>
+    <script type="module" src="../src/components/navbar.js"></script>
+  </head>
+  <body
+    data-page="job_sheet"
+    class="bg-white text-black dark:bg-black dark:text-white transition-colors duration-300"
+  >
+    <main class="pt-28 pb-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <header class="mb-6">
+          <h2 class="text-3xl font-extrabold">Dashboard</h2>
+          <p class="mt-1 text-gray-600 dark:text-gray-300 text-sm">
+            Overview of your job applications.
+          </p>
+        </header>
+
+        <!-- Dashboard -->
+        <div
+          id="dashboard-container"
+          class="bg-gray-100 dark:bg-gray-900 rounded-xl p-4"
+        >
+          <section
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+          >
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">
+                Applied
+              </div>
+              <div id="stat-applied" class="text-2xl font-bold mt-1">0</div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">Active</div>
+              <div
+                id="stat-active"
+                class="text-2xl font-bold mt-1 text-emerald-500"
+              >
+                0
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">
+                Shortlisted
+              </div>
+              <div
+                id="stat-shortlisted"
+                class="text-2xl font-bold mt-1 text-yellow-500"
+              >
+                0
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">
+                Interviewed
+              </div>
+              <div
+                id="stat-interviewed"
+                class="text-2xl font-bold mt-1 text-purple-500"
+              >
+                0
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">
+                Offered
+              </div>
+              <div
+                id="stat-offered"
+                class="text-2xl font-bold mt-1 text-indigo-500"
+              >
+                0
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl glass-border shadow-sm transform transition hover:-translate-y-1"
+            >
+              <div class="text-xs text-gray-600 dark:text-gray-300">
+                Rejected
+              </div>
+              <div
+                id="stat-rejected"
+                class="text-2xl font-bold mt-1 text-rose-500"
+              >
+                0
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Search + Controls -->
+        <section
+          class="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
+          <h3 class="text-2xl font-semibold">Your Jobs</h3>
+          <div class="flex items-center gap-3 w-full sm:w-auto">
+            <div class="relative w-full sm:w-80">
+              <input
+                id="job-search"
+                type="search"
+                placeholder="Search by title, company, location or skill..."
+                class="w-full rounded-full px-4 py-2 pl-10 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-yellow-500 outline-none"
+              />
+              <svg
+                class="w-5 h-5 text-gray-500 dark:text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"
+                ></path>
+              </svg>
+            </div>
+
+            <button
+              id="refresh-jobs"
+              class="bg-yellow-500 text-black px-4 py-2 rounded-full font-medium shadow hover:brightness-105 transition"
+            >
+              Refresh
+            </button>
+          </div>
+        </section>
+
+        <!-- Jobs list container -->
+        <section class="mt-6">
+          <div id="jobs-container" class="flex flex-col gap-6"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="../src/js/main.js" type="module"></script>
+  </body>
+</html>
