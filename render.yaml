@@ -58,7 +58,7 @@ services:
       cd frontend &&
       npm install &&
       npm run build
-    staticPublishPath: ./frontend/dist
+    staticPublishPath: ./frontend/public
     envVars:
       - key: REACT_APP_API_URL
         value: https://samboat-backend.onrender.com
