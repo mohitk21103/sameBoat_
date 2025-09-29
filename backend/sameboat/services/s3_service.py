@@ -45,6 +45,31 @@ class S3Service:
         except ClientError as e:
             raise Exception(f"S3 upload failed: {e}")
 
+    def upload_file_obj_to_s3(self, file_obj, key, filename=None):
+        """Upload file object directly to S3 without saving locally first"""
+        try:
+            # Auto-detect MIME type from filename
+            if filename:
+                content_type, _ = mimetypes.guess_type(filename)
+            else:
+                content_type = "application/octet-stream"
+            
+            content_type = content_type or "application/octet-stream"
+
+            self.client.upload_fileobj(
+                file_obj,
+                self.bucket,
+                key,
+                ExtraArgs={
+                    "ContentType": content_type,
+                    "ContentDisposition": "inline",
+                },
+            )
+            return f"https://{self.bucket}.s3.{settings.AWS_S3_REGION_NAME}.amazonaws.com/{key}"
+
+        except ClientError as e:
+            raise Exception(f"S3 upload failed: {e}")
+
     def delete_file_from_s3(self, key):
         """Delete file from S3"""
         try:

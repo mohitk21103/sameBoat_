@@ -11,8 +11,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, smart_str
 from django.core.mail import send_mail
 from django.conf import settings
-from users.tasks import upload_file_to_s3, delete_from_s3_task
+from users.tasks import upload_file_to_s3, upload_file_obj_to_s3, delete_from_s3_task
 from users.signals import extract_key
+import base64
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -170,14 +171,24 @@ class JobWriteSerializer(serializers.ModelSerializer):
         validated_data["user"] = user
         validated_data["is_active"] = True
 
+        # Remove resume and cover_letter from validated_data before saving
+        resume = validated_data.pop("resume", None)
+        cover_letter = validated_data.pop("cover_letter", None)
+
         job = super().create(validated_data)
 
-        # If resume uploaded → send to background
-        if job.resume:
-            upload_file_to_s3.delay(job.job_id, "resume_url", job.resume.path)
+        # If resume uploaded → send to background with direct S3 upload
+        if resume:
+            resume.seek(0)
+            file_data = base64.b64encode(resume.read()).decode('utf-8')
+            filename = resume.name.split('/')[-1]
+            upload_file_obj_to_s3.delay(job.job_id, "resume_url", file_data, filename)
 
-        if job.cover_letter:
-            upload_file_to_s3.delay(job.job_id, "cover_letter_url", job.cover_letter.path)
+        if cover_letter:
+            cover_letter.seek(0)
+            file_data = base64.b64encode(cover_letter.read()).decode('utf-8')
+            filename = cover_letter.name.split('/')[-1]
+            upload_file_obj_to_s3.delay(job.job_id, "cover_letter_url", file_data, filename)
 
         return job
 
@@ -191,17 +202,14 @@ class JobWriteSerializer(serializers.ModelSerializer):
 
             # If an old resume exists → delete from S3
             if instance.resume_url:
-                
                 old_key = extract_key(instance.resume_url)
                 delete_from_s3_task.delay(old_key)
 
-
-            # Save new resume locally first (Django temp upload)
-            instance.resume = new_resume
-            instance.save(update_fields=["resume"])
-
-            # Upload new resume to S3 in background
-            upload_file_to_s3.delay(instance.job_id, "resume_url", instance.resume.path)
+            # Do NOT save new resume locally; just upload to S3
+            new_resume.seek(0)
+            file_data = base64.b64encode(new_resume.read()).decode('utf-8')
+            filename = new_resume.name.split('/')[-1]
+            upload_file_obj_to_s3.delay(instance.job_id, "resume_url", file_data, filename)
 
         # Handle cover_letter replacement
         if "cover_letter" in validated_data:
@@ -211,10 +219,11 @@ class JobWriteSerializer(serializers.ModelSerializer):
                 old_key = extract_key(instance.cover_letter_url)
                 delete_from_s3_task.delay(old_key)
 
-            instance.cover_letter = new_cover_letter
-            instance.save(update_fields=["cover_letter"])
-
-            upload_file_to_s3.delay(instance.job_id, "cover_letter_url", instance.cover_letter.path)
+            # Do NOT save new cover letter locally; just upload to S3
+            new_cover_letter.seek(0)
+            file_data = base64.b64encode(new_cover_letter.read()).decode('utf-8')
+            filename = new_cover_letter.name.split('/')[-1]
+            upload_file_obj_to_s3.delay(instance.job_id, "cover_letter_url", file_data, filename)
 
         # Update non-file fields
         for attr, value in validated_data.items():
@@ -222,7 +231,6 @@ class JobWriteSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
-
 
 
 
