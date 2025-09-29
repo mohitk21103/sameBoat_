@@ -46,7 +46,7 @@ export function initLogin() {
       setFlash("Welcome back! You’re now logged in", "success", 4000);
       window.location.href = "job_sheet.html";
     } else {
-      showToast(res.message, "error");
+      showToast("login failed", "error");
       localStorage.removeItem("token");
     }
   });
