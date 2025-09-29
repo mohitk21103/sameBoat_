@@ -87,6 +87,9 @@ CORS_ALLOWED_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ALLOWED_ORI
 
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF Trusted Origins for production
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ALLOWED_ORIGINS", "").split(",") if origin.strip()]
+
 
 ROOT_URLCONF = 'sameboat.urls'
 
