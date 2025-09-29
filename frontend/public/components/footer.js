@@ -1,9 +1,9 @@
-const FOOTER_PATH = "../src/components/footer.html";
+const FOOTER_PATH = "./components/footer.html";
 
-export async function laodFooter() {
+export async function loadFooter() {
     const res = await fetch(FOOTER_PATH)
     const html = await res.text()
     document.body.insertAdjacentHTML("afterend", html);
 }
 
-document.addEventListener("DOMContentLoaded",laodFooter);
+document.addEventListener("DOMContentLoaded", loadFooter);

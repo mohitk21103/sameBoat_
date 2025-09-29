@@ -6,12 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run build:css && npm run copy:js && echo 'Development ready! Open public/index.html'",
-    "build:css": "tailwindcss -i ./src/css/tailwind.css -o ./public/css/styles.css --minify",
-    "build:css:dev": "tailwindcss -i ./src/css/tailwind.css -o ./public/css/styles.css",
-    "copy:js": "cp -r ./src/js ./public/ && cp -r ./src/components ./public/ && cp -r ./src/utils ./public/",
-    "build": "npm run build:css && npm run copy:js",
-    "clean": "rm -rf public/css public/js public/components public/utils && mkdir -p public/css"
+    "dev": "npm run build:css && echo 'Development ready! Open public/index.html'",
+    "build:css": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --minify",
+    "build:css:dev": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css",
+    "build": "npm run build:css",
+    "clean": "rm -rf public/css/styles.css && mkdir -p public/css"
   },
   "author": "Mohit Kanojiya",
   "license": "ISC",

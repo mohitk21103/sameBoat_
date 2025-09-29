@@ -5,7 +5,7 @@ import { setFlash } from "./flash.js";
 // ---------------------------
 // Global Config
 // ---------------------------
-const NAVBAR_PATH = "../src/components/navbar.html";
+const NAVBAR_PATH = "./components/navbar.html";
 const TOKEN_KEY = "token";
 
 const navConfig = [
@@ -187,9 +187,6 @@ export async function loadNavbar() {
       el.classList.add("hidden");
     }
   });
-
 }
 
-document.addEventListener("DOMContentLoaded",loadNavbar);
-
-
+document.addEventListener("DOMContentLoaded", loadNavbar);

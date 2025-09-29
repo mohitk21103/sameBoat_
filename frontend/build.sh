@@ -7,8 +7,8 @@ echo "🚀 Starting frontend build process..."
 echo "📦 Installing Node.js dependencies..."
 npm install
 
-# Build the project
-echo "🏗️ Building frontend..."
-npm run build
+# Build the CSS
+echo "🏗️ Building CSS..."
+npm run build:css
 
 echo "✅ Frontend build completed successfully!"
