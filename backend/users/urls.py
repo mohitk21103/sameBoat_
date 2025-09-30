@@ -16,7 +16,7 @@ from users.api.auth_views import(
     UserResetPasswordView,
 )
 
-from users.api.health_views import health_check, readiness_check, liveness_check
+from users.api.health_views import health_check, readiness_check, liveness_check, celery_health_check
 
 router = DefaultRouter()
 router.register("register-user", UserRegisterViewSet, "user")
@@ -34,4 +34,5 @@ urlpatterns = [
     path("health/", health_check, name="health_check"),
     path("health/ready", readiness_check, name="readiness_check"),
     path("health/alive", liveness_check, name="liveness_check"),
+    path("health/celery", celery_health_check, name="celery_health_check"),
 ]

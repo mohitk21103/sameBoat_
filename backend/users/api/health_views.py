@@ -5,6 +5,7 @@ import redis
 import os
 import psutil
 import time
+from celery import current_app
 
 def health_check(request):
     """
@@ -43,6 +44,19 @@ def health_check(request):
     except Exception as e:
         health_status["checks"]["redis"] = f"error: {str(e)}"
         health_status["status"] = "unhealthy"
+    
+    # Check Celery
+    try:
+        # Check if Celery broker is accessible
+        inspect = current_app.control.inspect()
+        stats = inspect.stats()
+        if stats:
+            health_status["checks"]["celery"] = "ok"
+        else:
+            health_status["checks"]["celery"] = "warning: no workers found"
+    except Exception as e:
+        health_status["checks"]["celery"] = f"error: {str(e)}"
+        # Don't mark as unhealthy for Celery issues in web service
     
     # System metrics
     try:
@@ -83,3 +97,38 @@ def liveness_check(request):
     the container is alive
     """
     return JsonResponse({"status": "alive"}, status=200)
+
+def celery_health_check(request):
+    """
+    Celery-specific health check for worker monitoring
+    """
+    try:
+        inspect = current_app.control.inspect()
+        
+        # Get worker stats
+        stats = inspect.stats()
+        active_tasks = inspect.active()
+        scheduled_tasks = inspect.scheduled()
+        
+        health_status = {
+            "status": "healthy",
+            "service": "celery-worker",
+            "timestamp": time.time(),
+            "workers": len(stats) if stats else 0,
+            "active_tasks": sum(len(tasks) for tasks in active_tasks.values()) if active_tasks else 0,
+            "scheduled_tasks": sum(len(tasks) for tasks in scheduled_tasks.values()) if scheduled_tasks else 0,
+        }
+        
+        if not stats:
+            health_status["status"] = "warning"
+            health_status["message"] = "No active workers found"
+        
+        return JsonResponse(health_status, status=200)
+        
+    except Exception as e:
+        return JsonResponse({
+            "status": "unhealthy",
+            "service": "celery-worker", 
+            "timestamp": time.time(),
+            "error": str(e)
+        }, status=503)

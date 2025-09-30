@@ -127,3 +127,21 @@ def delete_from_s3_task(key):
     s3 = S3Service()
     s3.delete_file_from_s3(key)
     return f"✅ Deleted {key} from S3"
+
+
+@shared_task
+def test_celery_task():
+    """
+    Simple test task to verify Celery is working
+    """
+    import time
+    time.sleep(1)  # Simulate some work
+    return "✅ Celery test task completed successfully!"
+
+@shared_task
+def heartbeat_task():
+    """
+    Periodic heartbeat task to keep worker alive
+    """
+    import time
+    return f"💓 Heartbeat at {time.time()}"
