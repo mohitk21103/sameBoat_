@@ -97,13 +97,23 @@ class UserPasswordResetLinkSerializer(serializers.Serializer):
         user = Users.objects.get(email=self.validated_data['email'])
         token = PasswordResetTokenGenerator().make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.user_id))
-        reset_link = f"http://localhost:5500/frontend/public/reset_password.html?uid={uid}&token={token}"
+        reset_link = f"https://sameboat.onrender.com/reset_password.html?uid={uid}&token={token}"
         
-        print(reset_link)  # Replace with send_email(reset_link)
+        # print(reset_link)  # Replace with send_email(reset_link)
 
         send_mail(
             subject="SameBoat - Password Reset",
-            message=f"Click the link to reset your password: {reset_link}",
+            message=(
+                "Hi there,\n\n"
+                "We received a request to reset your SameBoat password. No worries—just click the link below to choose a new one:\n\n"
+                f"{reset_link}\n\n"
+                "This link expires in a few minutes for your security. If you didn’t make this request, you can safely ignore this email—your password won’t change.\n\n"
+                "Need help? We're here for you:\n"
+                "📬 Contact us: https://sameboat.onrender.com/contact.html\n"
+                "🔗 Connect on LinkedIn: https://www.linkedin.com/in/mohit-kanojiya/\n\n"
+                "Stay afloat,\n"
+                "Team SameBoat "
+            ),
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[self.validated_data['email']],
             fail_silently=False,
