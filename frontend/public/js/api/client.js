@@ -1,6 +1,5 @@
 import { API_BASE_URL } from "../../utils/constants.js";
 
-
 export async function apiRequest(endpoint, options = {}) {
   try {
     const res = await fetch(`${API_BASE_URL}${endpoint}`, {

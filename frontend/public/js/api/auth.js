@@ -20,50 +20,15 @@ export async function loginUser(credentials) {
       body: JSON.stringify(credentials),
     });
 
-    // Check if response is ok first
-    if (!res.ok) {
-      // Try to get error message from response
-      let errorMessage = "Login failed";
-      try {
-        const errorData = await res.json();
-        errorMessage = errorData.message || errorData.detail || errorMessage;
-      } catch {
-        // If response is not JSON, use status-based messages
-        switch (res.status) {
-          case 400:
-            errorMessage = "Invalid email or password";
-            break;
-          case 401:
-            errorMessage = "Unauthorized, please login again";
-            break;
-          case 500:
-            errorMessage = "Server error, try later";
-            break;
-          default:
-            errorMessage = `Server error (${res.status})`;
-        }
-      }
-      throw new Error(errorMessage);
-    }
+    // Specific error handling
+    if (res.status === 400) throw new Error("Invalid email or password");
+    if (res.status === 401) throw new Error("Unauthorized, please login again");
+    if (res.status === 500) throw new Error("Server error, try later");
+    if (!res.ok) throw new Error("Unexpected error occurred");
 
-    // Check if response has content before trying to parse JSON
-    const contentType = res.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Server returned invalid response format");
-    }
+    const data = await res.json();
 
-    // Safely parse JSON response
-    let data;
-    try {
-      data = await res.json();
-    } catch (parseError) {
-      console.error("JSON parsing error:", parseError);
-      throw new Error("Server returned invalid JSON response");
-    }
-
-    if (!data || !data.token) {
-      throw new Error("No token returned from server");
-    }
+    if (!data.token) throw new Error("No token returned from server");
 
     // Store token securely (localStorage for demo, consider HttpOnly cookies for prod)
     localStorage.setItem("token", data.token);
@@ -74,7 +39,7 @@ export async function loginUser(credentials) {
     if (error.message === "Failed to fetch") {
       const msg =
         "Login Service is unavailable right now. Please try after sometime";
-      return { success: false, message: msg };
+      return { success: false, message: msg || "Login failed" };
     }
     return { success: false, message: error.message || "Login failed" };
   }
@@ -275,36 +240,11 @@ export async function refresh_token() {
       credentials: "include", // send cookies
     });
 
-    if (!res.ok) {
-      let errorMessage = "Failed to refresh session";
-      try {
-        const errorData = await res.json();
-        errorMessage = errorData.detail || errorData.message || errorMessage;
-      } catch {
-        errorMessage = `Refresh failed (${res.status})`;
-      }
-      throw new Error(errorMessage);
-    }
+    if (!res.ok) throw new Error("Failed to refresh session");
 
-    // Check content type before parsing
-    const contentType = res.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new Error("Server returned invalid response format");
-    }
-
-    let data;
-    try {
-      data = await res.json();
-    } catch (parseError) {
-      console.error("JSON parsing error in refresh:", parseError);
-      throw new Error("Server returned invalid JSON response");
-    }
-
-    if (!data || !data.access) {
-      throw new Error("No access token returned from server");
-    }
-
+    const data = await res.json();
     console.log(data);
+
     localStorage.setItem("token", data.access);
     return { success: true, data: data.access };
   } catch (error) {

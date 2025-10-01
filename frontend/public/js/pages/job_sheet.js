@@ -24,10 +24,10 @@ export async function initJobsheet() {
     console.error("Job fetch error:", error.message);
     showToast("Not able to fetch the job", "error");
   }
-  
+
+  // Refresh button
   const refreshBtn = document.getElementById("refresh-jobs");
   refreshBtn.addEventListener("click", async () => {
-    console.log("btn clicked");
     try {
       const data = await load_CurrentUser_JobData(); // your existing method
       if (data) renderJobs(data);
@@ -325,7 +325,18 @@ export function renderJobs(job_data) {
     if (event.target.classList.contains("job-delete-btn")) {
       const response = await deleteJobById(jobId);
       if (response.success) {
-        setFlash("Job deleted successfully", "success");
+        showToast("Job deleted successfully", "success");
+        // Remove the job card from the DOM
+        if (jobCard && jobCard.parentNode) {
+          jobCard.parentNode.removeChild(jobCard);
+        }
+        // Optionally, remove from job_data array in memory so search/stats update correctly
+        const idx = job_data.findIndex((job) => job.job_id === jobId);
+        if (idx !== -1) {
+          job_data.splice(idx, 1);
+        }
+        // Update dashboard stats after deletion
+        updateDashboard(job_data);
       } else {
         console.error(
           `error while deletion: ${response?.message}`,

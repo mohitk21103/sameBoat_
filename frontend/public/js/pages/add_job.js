@@ -9,7 +9,6 @@ import { readFlash } from "../../components/flash.js";
  * Handles form validation, API call, and user feedback.
  */
 export async function initAddJob() {
-  
   const form = document.getElementById("addJob-form");
 
   if (!form) return;
@@ -28,7 +27,8 @@ export async function initAddJob() {
     const res = await createJob(job_data);
 
     if (res.success) {
-      setFlash("Job added successfully", "success");
+      showToast("Job added successfully", "success");
+      form.reset();
     } else {
       if (res.message === "Failed to fetch") {
         showToast("Unable to connect. Please try again later.", "error");
@@ -38,12 +38,8 @@ export async function initAddJob() {
       }
     }
   });
-
-  const flash = readFlash();
-  if (flash) {
-    showToast(flash.message, flash.type, flash.duration);
-  }
 }
+  // No need to readFlash here, as flash is now shown immediately on success
 
 export function get_AddJobData(form) {
   const formData = new FormData();
